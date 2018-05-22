@@ -8,8 +8,9 @@ const Main = () => {
     return (
         <div className="Main" style={style}>
             <Sidebar />
-            <NoteForm />
             <NoteList />
+            <NoteForm />
+
         </div>
     )
 }
