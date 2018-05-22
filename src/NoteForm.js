@@ -1,11 +1,25 @@
-import React from 'react'
+import React from "react";
 
-const NoteForm = () => {
+class NoteForm extends React.Component {
+  render() {
     return (
-        <div className="NoteList">
-            NoteForm
+      <div className="NoteList">
+        <div class="NoteForm">
+          <div class="form-actions">
+            <button type="button">
+              <i class="fa fa-trash-o" />
+            </button>
+          </div>
+          <form>
+            <p>
+              <input type="text" name="title" placeholder="Title your note" />
+            </p>
+            <textarea name="body" />
+          </form>
         </div>
-    )
+      </div>
+    );
+  }
 }
 
-export default NoteForm
+export default NoteForm;
