@@ -1,17 +1,18 @@
 import React from 'react'
 
-const Note = ({ note, setCurrentNote}) => {
+const Note = ({ note, setCurrentNote }) => {
   return (
     <li
       className="Note"
-      onClick={() => setCurrentNote(note)}>
+      onClick={() => setCurrentNote(note)}
+    >
       <div className="note">
         <div className="note-title">
-          {note.title}
+          { note.title }
         </div>
         <div className="note-body">
           <p>
-            {note.body}
+            { note.body }
           </p>
         </div>
       </div>
@@ -19,4 +20,4 @@ const Note = ({ note, setCurrentNote}) => {
   )
 }
 
-export default Note 
+export default Note
