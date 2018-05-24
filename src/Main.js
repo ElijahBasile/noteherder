@@ -1,5 +1,6 @@
 import React from 'react'
 
+import base from './base'
 import Sidebar from './Sidebar'
 import NoteList from './NoteList'
 import NoteForm from './NoteForm'
@@ -14,24 +15,11 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    localStorage.getItem('notes') && this.setState({
-      notes: JSON.parse(localStorage.getItem('notes'))
+    base.syncState('notes', {
+      context: this,
+      state: 'notes',
+      asArray: true,
     })
-
-    localStorage.getItem('currentNote') && this.setState({
-      currentNote: JSON.parse(localStorage.getItem('currentNote'))
-    })
-  }
-
-  componentDidMount() {
-    if(localStorage.getItem('notes')) {
-      console.log('Using Data from local storage')
-    }
-  }
-
-  componentWillUpdate(nextprops,nextState) {
-    localStorage.setItem('notes', JSON.stringify(nextState.notes))
-    localStorage.setItem('currentNote', JSON.stringify(nextState.currentNote))
   }
 
   blankNote = () => {
@@ -65,18 +53,18 @@ class Main extends React.Component {
 
     this.setState({ notes })
     this.setCurrentNote(note)
-  }
+}
 
-  deleteItem = (note) => {
+  removeCurrentNote = () => {
     const notes = [...this.state.notes]
 
-    const i = notes.findIndex(currentNote => currentNote.id === note.id)
-    if(i !== -1) {
-      notes.splice(i,1)
+    const i = notes.findIndex(note => note.id === this.state.currentNote.id)
+    if (i > -1) {
+      notes.splice(i, 1)
+      this.setState({ notes })
     }
 
-    this.setState({ notes })
-    this.setCurrentNote(this.blankNote())
+    this.resetCurrentNote()
   }
 
   render() {
@@ -89,7 +77,8 @@ class Main extends React.Component {
         />
         <NoteForm
           currentNote={this.state.currentNote}
-          saveNote={this.saveNote} deleteItem={this.deleteItem}
+          saveNote={this.saveNote}
+          removeCurrentNote={this.removeCurrentNote}
         />
       </div>
     )
