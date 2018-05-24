@@ -10,7 +10,6 @@ const NoteForm = ({ currentNote, saveNote, deleteItem }) => {
   }
 
   const deleteNote = (ev) => {
-    debugger
     const note = {...currentNote}
     note[ev.target.name] = ev.target.value
     deleteItem(note)
