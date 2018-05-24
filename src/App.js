@@ -3,10 +3,21 @@ import React, { Component } from 'react'
 import './App.css'
 import Main from './Main'
 import SignIn from './SignIn'
+import { auth } from './base'
 
 class App extends Component {
   state = {
     uid: null,
+  }
+
+  componentDidMount() {
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        this.handleAuth()
+      } else { 
+        this.signOut()
+      }
+    })
   }
 
   handleAuth = () => {
@@ -19,6 +30,7 @@ class App extends Component {
 
   signOut = () => {
     this.setState({ uid: null })
+    auth.signOut()
   }
   
   render() {
@@ -26,7 +38,7 @@ class App extends Component {
       <div className="App">
         {
           this.signedIn() 
-            ? <Main /> 
+            ? <Main signOut={this.signOut}/> 
             : <SignIn handleAuth={this.handleAuth} />
         }
 
