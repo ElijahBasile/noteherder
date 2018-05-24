@@ -2,6 +2,7 @@ import React from 'react'
 
 import './SignIn.css'
 import googleLogo from './google.svg'
+import logo from './quill.svg'
 import { auth, githubProvider, googleProvider } from './base'
 
 const SignIn = () => {
@@ -13,7 +14,7 @@ const SignIn = () => {
     <div className="SignIn">
       <header className="Header">
         <img src="media/quill.svg" alt="" />
-        <span className="title">Noteherder</span>
+        <span className="title"><img src={logo} alt="noteherder"/>Noteherder</span>
       </header>
       <main>
         <h3>Hey, Nerd! You Like Notes?</h3>

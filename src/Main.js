@@ -6,8 +6,8 @@ import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 
 class Main extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       currentNote: this.blankNote(),
       notes: [],
@@ -15,7 +15,7 @@ class Main extends React.Component {
   }
 
   componentWillMount() {
-    base.syncState('notes', {
+    base.syncState(this.props.uid, {
       context: this,
       state: 'notes',
       asArray: true,
