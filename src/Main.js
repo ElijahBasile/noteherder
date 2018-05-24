@@ -13,22 +13,6 @@ class Main extends React.Component {
     }
   }
 
-  blankNote = () => {
-    return {
-      id: null,
-      title: '',
-      body: '',
-    }
-  }
-
-  setCurrentNote = (note) => {
-    this.setState({ currentNote: note })
-  }
-
-  resetCurrentNote = () => {
-    this.setCurrentNote(this.blankNote())
-  }
-
   componentWillMount() {
     localStorage.getItem('notes') && this.setState({
       notes: JSON.parse(localStorage.getItem('notes'))
@@ -48,6 +32,22 @@ class Main extends React.Component {
   componentWillUpdate(nextprops,nextState) {
     localStorage.setItem('notes', JSON.stringify(nextState.notes))
     localStorage.setItem('currentNote', JSON.stringify(nextState.currentNote))
+  }
+
+  blankNote = () => {
+    return {
+      id: null,
+      title: '',
+      body: '',
+    }
+  }
+
+  setCurrentNote = (note) => {
+    this.setState({ currentNote: note })
+  }
+
+  resetCurrentNote = () => {
+    this.setCurrentNote(this.blankNote())
   }
 
   saveNote = (note) => {
