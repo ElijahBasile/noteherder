@@ -2,7 +2,7 @@
 
 ##Day 8 Homework
 
-* make sure base.js and ebase.example.js are the same
+* make sure base.js and base.example.js are the same
 * Add Google authentication
 
 ### Bonus Credit
