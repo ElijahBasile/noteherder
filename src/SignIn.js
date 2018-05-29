@@ -13,7 +13,6 @@ const SignIn = () => {
   return (
     <div className="SignIn">
       <header className="Header">
-        <img src="media/quill.svg" alt="" />
         <span className="title"><img src={logo} alt="noteherder"/>Noteherder</span>
       </header>
       <main>
