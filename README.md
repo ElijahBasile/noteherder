@@ -1,6 +1,6 @@
 # Noteherder 
 
-##Day 8 Homework
+## Day 8 Homework
 
 * make sure base.js and base.example.js are the same
 * Add Google authentication
