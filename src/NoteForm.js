@@ -1,20 +1,39 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import './NoteForm.css'
 
-const NoteForm = ({ currentNote, saveNote, deleteItem }) => {
+class NoteForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      note: 
+    }
+  }
+
+  blankNote() {
+    title: '',
+    body: '',
+    id: null,
+  }
+
+
   const handleChanges = (ev) => {
-    const note = {...currentNote}
+    const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
-    saveNote(note)
+    this.setState(
+      { note },
+      () => this.props.saveNote(note)
+    )
   }
 
   const deleteNote = (ev) => {
-    const note = {...currentNote}
+    const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
     deleteItem(note)
   }
 
+  render() {
+  const { currentNote, saveNote, deleteItem } = this.props
   return (
     <div className="NoteForm">
       <div className="form-actions">
@@ -30,19 +49,20 @@ const NoteForm = ({ currentNote, saveNote, deleteItem }) => {
             type="text"
             name="title"
             placeholder="Title your note"
-            value={currentNote.title}
+            value={this.state.note.title}
             onChange={handleChanges}
           />
         </p>
 
         <textarea
           name="body"
-          value={currentNote.body}
+          value={this.state.note.body}
           onChange={handleChanges}
         ></textarea>
       </form>
     </div>
   )
+}
 }
 
 export default NoteForm

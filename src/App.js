@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route, Switch, Redirect } from 'react-router-dom'
 
 import './App.css'
 import { auth } from './base'
@@ -37,17 +38,36 @@ class App extends Component {
     localStorage.setItem('user', (null))
     this.setState({ uid: null })
     auth.signOut()
-    
   }
 
   render() {
     return (
       <div className="App">
-        {
-          this.signedIn()
-            ? <Main signOut={this.signOut} uid={this.state.uid}/>
-            : <SignIn handleAuth={this.handleAuth} />
-        }
+        <Switch>
+          <Route 
+            path="/sign-in" 
+            render={() => (
+              this.signedIn()
+                ? <Redirect to="/notes" />
+                : <SignIn />
+            )} 
+          />
+          <Route 
+            path="/notes" 
+            render={() => (
+              this.signedIn()
+                ? <Main signOut={this.signOut} uid={this.state.uid}/>
+                : <Redirect to="/sign-in" />
+            )} 
+          />
+          <Route 
+            render={() =>(
+              this.signedIn()
+                ? <Redirect to="/notes" />
+                : <Redirect to="/sign-in" />
+            )}
+          />
+        </Switch>
       </div>
     )
   }
