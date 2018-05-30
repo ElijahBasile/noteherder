@@ -10,6 +10,20 @@ class NoteForm extends Component {
     }
   }
 
+  componentWillReceiveProps = (newProps) => {
+    //get the id from the url
+    const newId = newProps.match.params.id
+    
+    //find the note with that ID
+    const i = newProps.notes.findIndex(currentNtoe => currentNote.id === newId)
+    const note = newProps.notes[i]
+    
+    //update state with that note, if found
+    if (note) {
+      this.setState({ note })
+    }
+  }
+
   blankNote() {
     title: '',
     body: '',
@@ -17,7 +31,7 @@ class NoteForm extends Component {
   }
 
 
-  const handleChanges = (ev) => {
+  handleChanges = (ev) => {
     const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
     this.setState(
@@ -26,7 +40,7 @@ class NoteForm extends Component {
     )
   }
 
-  const deleteNote = (ev) => {
+  deleteNote = (ev) => {
     const note = {...this.state.note}
     note[ev.target.name] = ev.target.value
     deleteItem(note)
