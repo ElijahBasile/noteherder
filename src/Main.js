@@ -7,8 +7,8 @@ import NoteList from './NoteList'
 import NoteForm from './NoteForm'
 
 class Main extends React.Component {
-  constructor(props) {
-    super(props)
+  constructor() {
+    super()
     this.state = {
       currentNote: this.blankNote(),
       notes: [],
@@ -75,6 +75,7 @@ class Main extends React.Component {
       removeCurrentNote: this.removeCurrentNote,
       notes: this.state.notes,
     }
+
     return (
       <div className="Main" style={style}>
         <Sidebar
@@ -83,25 +84,25 @@ class Main extends React.Component {
         />
         <NoteList
           notes={this.state.notes}
-          setCurrentNote={this.setCurrentNote}
         />
+
         <Switch>
-          <Route 
+          <Route
             path="/notes/:id"
             render={navProps => (
               <NoteForm
                 {...formProps}
                 {...navProps}
               />
-            )} 
+            )}
           />
-          <Route 
+          <Route
             render={navProps => (
               <NoteForm
                 {...formProps}
                 {...navProps}
               />
-            )} 
+            )}
           />
         </Switch>
       </div>

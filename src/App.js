@@ -11,11 +11,11 @@ class App extends Component {
     uid: null,
   }
 
-
   componentDidMount() {
-    this.setState({
-      uid: (localStorage.getItem('user'))
-    })
+    const uid = localStorage.getItem('uid')
+    if (uid) {
+      this.setState({ uid })
+    }
     auth.onAuthStateChanged(user => {
       if (user) {
         this.handleAuth(user)
@@ -26,8 +26,8 @@ class App extends Component {
   }
 
   handleAuth = (user) => {
-    localStorage.setItem('user', (user.uid))
     this.setState({ uid: user.uid })
+    localStorage.setItem('uid', user.uid)
   }
 
   signedIn = () => {
@@ -35,8 +35,8 @@ class App extends Component {
   }
 
   signOut = () => {
-    localStorage.setItem('user', (null))
     this.setState({ uid: null })
+    localStorage.removeItem('uid')
     auth.signOut()
   }
 
@@ -44,24 +44,24 @@ class App extends Component {
     return (
       <div className="App">
         <Switch>
-          <Route 
-            path="/sign-in" 
+          <Route
+            path="/sign-in"
             render={() => (
               this.signedIn()
                 ? <Redirect to="/notes" />
                 : <SignIn />
-            )} 
+            )}
           />
-          <Route 
-            path="/notes" 
+          <Route
+            path="/notes"
             render={() => (
               this.signedIn()
-                ? <Main signOut={this.signOut} uid={this.state.uid}/>
-                : <Redirect to="/sign-in" />
-            )} 
+               ? <Main signOut={this.signOut} uid={this.state.uid} />
+               : <Redirect to="/sign-in" />
+            )}
           />
-          <Route 
-            render={() =>(
+          <Route
+            render={() => (
               this.signedIn()
                 ? <Redirect to="/notes" />
                 : <Redirect to="/sign-in" />
