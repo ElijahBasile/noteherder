@@ -54,9 +54,13 @@ class App extends Component {
           />
           <Route
             path="/notes"
-            render={() => (
+            render={navProps => (
               this.signedIn()
-               ? <Main signOut={this.signOut} uid={this.state.uid} />
+               ? <Main 
+                  signOut={this.signOut} 
+                  uid={this.state.uid}
+                  {...navProps}
+                />
                : <Redirect to="/sign-in" />
             )}
           />
