@@ -44,7 +44,6 @@ class Main extends React.Component {
       const i = notes.findIndex(currentNote => currentNote.id === note.id)
       notes[i] = note
     }
-    note.date = this.updateNote()
     this.setState({ notes })
     if(shouldRedirect) {
       this.props.history.push(`/notes/${note.id}`)
@@ -79,7 +78,6 @@ class Main extends React.Component {
       saveNote: this.saveNote,
       removeNote: this.removeNote,
       notes: this.state.notes,
-      date: this.updateNote,
     }
 
     return (

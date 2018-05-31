@@ -12,7 +12,6 @@ const NoteList = (props) => {
           <Note
             key={note.id}
             note={note}
-            date={note.date}
           />
         ))}
       </ul>
