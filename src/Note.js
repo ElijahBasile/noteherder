@@ -14,6 +14,11 @@ const Note = ({ note }) => {
               { note.body }
             </p>
           </div>
+          <div className="note-body">
+            <p>
+              { note.date }
+            </p>
+          </div>
         </div>
       </li>
     </NavLink>
